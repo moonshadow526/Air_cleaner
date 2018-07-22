@@ -15,8 +15,9 @@
 ////////////////////////////////////////////////////////////////////////////////// 	 
 
 uint8_t get_Air_adc_val_f = 0;
-
+extern uint8_t Usart_recive_cmpl;
 extern vu16 USART3_RX_STA;
+uint8_t Usart_recive_cmpl = 0;
 
 //定时器7中断服务程序		 
 
@@ -56,7 +57,8 @@ void TIM4_IRQHandler(void)
 	if (TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)//是更新中断
 	{	 			   
 		USART3_RX_STA|=1<<15;	//标记接收完成
-		TIM_ClearITPendingBit(TIM4, TIM_IT_Update  );  //清除TIM4更新中断标志    
+		Usart_recive_cmpl = 1;
+		TIM_ClearITPendingBit(TIM4, TIM_IT_Update);  //清除TIM4更新中断标志    
 		TIM_Cmd(TIM4, DISABLE);  //关闭TIM4 
 	}	    
 }

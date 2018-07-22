@@ -6,6 +6,13 @@
 #include <string.h>
 #include "timer.h"
 
+extern u32 ChipUniqueID[3];
+extern char deviceid[12];
+char expressText[200];  //存放待加密的明文数据，具体缓存大小根据用户待加密数据长度自己任意修改
+char cipherText[400];//存放已加密的密文数据，具体缓存大小根据用户解密后的数据长度自己任意修改
+extern u8 datatemp[] ;
+
+
 void m26_Powerkey_Init(void)
 {
  
@@ -32,68 +39,6 @@ uint8_t* 	m26_check_cmd(uint8_t *str);
 /*-------------------------------------------------------------------*/
 /*-------------------------------------------------------------------*/
 
-/**
- * @brief M26 模块拨号测试
- */
-//void 	m26_call_test(void)
-//{
-//	switch(M26_State)
-//	{
-//		case 0:
-//			m26_poweron();
-//			M26_State++;
-//			break;
-//		case 1:
-//			/* 启用命令回显 */
-//			m26_send_cmd("ATE1\r\n", "OK", 200);
-//			/* 显示被叫识别 */
-//			m26_send_cmd("AT+COLP=1\r\n", "OK", 200);
-//			/* 切换音频通道为耳机通道 */
-//			m26_send_cmd("AT+QAUDCH=1\r\n", "OK", 200);
-//			/* 建立语音呼叫, 拨打 10086 */
-//			m26_send_cmd("ATD10086;\r\n", "OK", 200);
-//		
-//			M26_State++;
-//			break;
-//		case 2:
-//			
-//			break;
-//		case 3:
-//			
-//			break;
-//		default:
-//			break;
-//	}
-//}
-
-///**
-//  * @brief	接听语音呼叫
-//  */
-//void 	m26_ring_test(void)
-//{
-//	switch(M26_State)
-//	{
-//		case 0:
-//			m26_poweron();
-//			M26_State++;
-//			break;
-//		case 1:
-//			if (m26_check_cmd("RING"))
-//			{
-//				M26_State++;
-//			}
-//			
-//			break;
-//		case 2:
-//			/* 接听语音呼叫 */
-//			m26_send_cmd("ATA\r\n", "OK", 200);
-//			
-//			M26_State++;
-//			break;
-//		default:
-//			break;
-//	}
-//}
 
 /**
   * @brief	M26 TCP连接测试
@@ -102,25 +47,19 @@ void m26_build_tcp_connect(void)
 {
 	int i = 0,j = 0;
 	uint8_t ret;
-//	switch(M26_State)
-//	{
-//		case 0:
-//			m26_poweron();
-//			M26_State++;
-//			break;
-//		case 1:
-			m26_send_cmd("AT\r\n", "OK", 35);
-			m26_send_cmd("AT+CPIN?\r\n", "OK", 35);
-			m26_send_cmd("AT+CREG?\r\n", "OK", 35);
-			m26_send_cmd("AT+CGATT?\r\n", "OK", 35);
-			m26_send_cmd("AT+QIFGCNT=0\r\n", "OK", 35);
-			printf("recive CMD_AT data is: %s \n",USART3_RX_BUF);
+//	printf("read flash data is: %10s\n",datatemp);
+		m26_send_cmd("AT\r\n", "OK", 35);
+		m26_send_cmd("AT+CPIN?\r\n", "OK", 35);
+		m26_send_cmd("AT+CREG?\r\n", "OK", 35);
+		m26_send_cmd("AT+CGATT?\r\n", "OK", 35);
+		m26_send_cmd("AT+QIFGCNT=0\r\n", "OK", 35);
+		printf("recive CMD_AT data is: %s \n",USART3_RX_BUF);
 //			m26_send_cmd("AT+QICSGP=1,\"FXTX.ZB.SD\"\r\n", "OK", 200);
 //			m26_send_cmd("AT+QIMUX=0\r\n", "OK", 200);
 //			m26_send_cmd("AT+QIMODE=0\r\n", "OK", 200);
-			m26_send_cmd("AT+QIDNSIP=1\r\n", "OK", 35);
+		m26_send_cmd("AT+QIDNSIP=1\r\n", "OK", 35);
 //			m26_send_cmd("AT+QINDI=1\r\n", "OK", 35);
-			printf("recive CMD_AT data is: %s \n",USART3_RX_BUF);
+		printf("recive CMD_AT data is: %s \n",USART3_RX_BUF);
 //			m26_send_cmd("AT+QIREGAPP\r\n", "OK", 200);
 //			m26_send_cmd("AT+QIACT\r\n", "OK", 200);
 //			m26_send_cmd("AT+QILOCIP\r\n", "OK", 200);
@@ -128,12 +67,15 @@ void m26_build_tcp_connect(void)
 			for(i=0; i<3; i++)
 			{
 //				m26_send_cmd("AT+QIOPEN=\"TCP\",\"119.90.52.85\",\"12345\"\r\n", "CONNECT OK", 300);
-				m26_send_cmd("AT+QIOPEN=\"TCP\",\"b2115902m0.51mypc.cn\",\"57380\"\r\n", "CONNECT OK", 35);
+//				m26_send_cmd(datatemp, "CONNECT OK", 300);
+				printf("recive tcp data is: %s \n",USART3_RX_BUF);
+				m26_send_cmd("AT+QIOPEN=\"TCP\",\"b2115902m0.51mypc.cn\",\"57380\"\r\n", "CONNECT OK", 300);
 				if(strstr((const char*)USART3_RX_BUF, "OK"))
 				{
 					printf("TCP status judge\n");
 					for(j = 0 ;j<25; j++)
 					{
+						USART3_RX_STA = 0;
 						if(strstr((const char*)USART3_RX_BUF, "CONNECT OK"))
 						{
 							printf("connect ok!!!/n");
@@ -174,13 +116,26 @@ void m26_build_tcp_connect(void)
 				}
 			}
 			printf("break ok!!!/n");
-
 }
 
 void m26_send_msg(void)
 {
+	
+	AES_Encrypt(expressText  , strlen(expressText) , cipherText);	//use aesKey encrypt
+	
+	 printf("AES_Encrypt data is:   %s\r\n",cipherText);
+	 
+	 
+	memset(expressText ,0 ,200);
+	AES_Decrypt(cipherText , (sizeof(cipherText)) , expressText);//use aesKey decrypt
+	printf("AES_Decrypt data is:   %s\r\n",expressText);	
+	
+//	STMFLASH_Read(FLASH_SAVE_ADDR,(u16*)datatemp,sizeof(datatemp));
+	printf("read flash data is: %s\n",datatemp);
+	
 	m26_send_cmd("AT+QISEND\r\n", ">", 35);
-	m26_send_cmd("{\"uuid\":\"12345\"}", "SEND OK", 35);
+	m26_send_cmd(cipherText, "SEND OK", 35);
+//	m26_send_cmd("{\"uuid\":\"12345\"}", "SEND OK", 35);
 }
 
 /*-------------------------------------------------------------------*/

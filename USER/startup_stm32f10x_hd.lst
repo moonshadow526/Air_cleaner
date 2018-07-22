@@ -56,9 +56,9 @@ ARM Macro Assembler    Page 1
    32 00000000         ;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
    33 00000000         ; </h>
    34 00000000         
-   35 00000000 00000400 
+   35 00000000 00000800 
                        Stack_Size
-                               EQU              0x00000400
+                               EQU              0x00000800
    36 00000000         
    37 00000000                 AREA             STACK, NOINIT, READWRITE, ALIGN
 =3
@@ -70,29 +70,29 @@ ARM Macro Assembler    Page 2
 
 
                                SPACE            Stack_Size
-   39 00000400         __initial_sp
-   40 00000400         
-   41 00000400         ; <h> Heap Configuration
-   42 00000400         ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
-   43 00000400         ; </h>
-   44 00000400         
-   45 00000400 00000200 
+   39 00000800         __initial_sp
+   40 00000800         
+   41 00000800         ; <h> Heap Configuration
+   42 00000800         ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
+   43 00000800         ; </h>
+   44 00000800         
+   45 00000800 00000400 
                        Heap_Size
-                               EQU              0x00000200
-   46 00000400         
-   47 00000400                 AREA             HEAP, NOINIT, READWRITE, ALIGN=
+                               EQU              0x00000400
+   46 00000800         
+   47 00000800                 AREA             HEAP, NOINIT, READWRITE, ALIGN=
 3
    48 00000000         __heap_base
    49 00000000         Heap_Mem
                                SPACE            Heap_Size
-   50 00000200         __heap_limit
-   51 00000200         
-   52 00000200                 PRESERVE8
-   53 00000200                 THUMB
-   54 00000200         
-   55 00000200         
-   56 00000200         ; Vector Table Mapped to Address 0 at Reset
-   57 00000200                 AREA             RESET, DATA, READONLY
+   50 00000400         __heap_limit
+   51 00000400         
+   52 00000400                 PRESERVE8
+   53 00000400                 THUMB
+   54 00000400         
+   55 00000400         
+   56 00000400         ; Vector Table Mapped to Address 0 at Reset
+   57 00000400                 AREA             RESET, DATA, READONLY
    58 00000000                 EXPORT           __Vectors
    59 00000000                 EXPORT           __Vectors_End
    60 00000000                 EXPORT           __Vectors_Size
@@ -554,10 +554,10 @@ ARM Macro Assembler    Page 9
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=..\obj\startup_stm32f10x_hd.d -o..\obj\startup_stm32f10x_hd.o -I.\
 RTE\_Target_1 -ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include -ID:\Keil_v5\
-ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include --predefine="__EVAL SETA 1" --
-predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 525" --predef
-ine="_RTE_ SETA 1" --predefine="STM32F10X_HD SETA 1" --list=.\startup_stm32f10x
-_hd.lst ..\CORE\startup_stm32f10x_hd.s
+ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include --predefine="__MICROLIB SETA 1
+" --predefine="__UVISION_VERSION SETA 525" --predefine="_RTE_ SETA 1" --predefi
+ne="STM32F10X_HD SETA 1" --list=.\startup_stm32f10x_hd.lst ..\CORE\startup_stm3
+2f10x_hd.s
 
 
 
@@ -580,7 +580,7 @@ Symbol: Stack_Mem
    Uses
       None
 Comment: Stack_Mem unused
-__initial_sp 00000400
+__initial_sp 00000800
 
 Symbol: __initial_sp
    Definitions
@@ -620,7 +620,7 @@ Symbol: __heap_base
    Uses
       At line 336 in file ..\CORE\startup_stm32f10x_hd.s
 Comment: __heap_base used once
-__heap_limit 00000200
+__heap_limit 00000400
 
 Symbol: __heap_limit
    Definitions
@@ -1381,7 +1381,7 @@ Symbol: WWDG_IRQHandler
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 Absolute symbols
 
-Heap_Size 00000200
+Heap_Size 00000400
 
 Symbol: Heap_Size
    Definitions
@@ -1389,7 +1389,7 @@ Symbol: Heap_Size
    Uses
       At line 49 in file ..\CORE\startup_stm32f10x_hd.s
 Comment: Heap_Size used once
-Stack_Size 00000400
+Stack_Size 00000800
 
 Symbol: Stack_Size
    Definitions
@@ -1429,4 +1429,4 @@ Symbol: __main
       At line 153 in file ..\CORE\startup_stm32f10x_hd.s
 Comment: __main used once
 2 symbols
-424 symbols in table
+423 symbols in table

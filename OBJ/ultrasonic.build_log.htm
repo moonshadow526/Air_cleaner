@@ -5,10 +5,10 @@
 <h2>Tool Versions:</h2>
 IDE-Version: μVision V5.25.2.0
 Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: shen ying, huilong, LIC=----
+License Information: shen ying, huilong, LIC=UB463-AAVDJ-5A9DF-6BTKL-9LM2F-L7CIP
  
 Tool Versions:
-Toolchain:       MDK-Lite  Version: 5.25.2.0
+Toolchain:       MDK-ARM Professional  Version: 5.25.2.0
 Toolchain Path:  D:\Keil_v5\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.06 update 6 (build 750)
 Assembler:       Armasm.exe V5.06 update 6 (build 750)
@@ -22,12 +22,21 @@ Dialog DLL:      TCM.DLL V1.35.1.0
  
 <h2>Project:</h2>
 E:\chke\doc&pro\外包 移远M26 空气净化器\Air_cleaner\USER\Air_cleaner.uvprojx
-Project File Date:  06/20/2018
+Project File Date:  06/28/2018
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
-"..\OBJ\ultrasonic.axf" - 0 Error(s), 0 Warning(s).
+compiling data_parser.c...
+data_parser.c(14): warning:  #223-D: function "strlen" declared implicitly
+  		if('{' == USART3_RX_BUF[0]&&'}'== USART3_RX_BUF[strlen(USART3_RX_BUF)-1])
+data_parser.c(16): warning:  #223-D: function "strstr" declared implicitly
+  			if(strstr(USART3_RX_BUF,"operation\":\"open"))
+data_parser.c: 2 warnings, 0 errors
+linking...
+Program Size: Code=26940 RO-data=8888 RW-data=164 ZI-data=7332  
+FromELF: creating hex file...
+"..\OBJ\ultrasonic.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -50,7 +59,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.1.1
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

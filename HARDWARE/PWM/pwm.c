@@ -2,23 +2,8 @@
 #include "pwm.h"
 #include "delay.h"
 
-void breath_LED(void)
+void breath_LED(uint16_t val,uint8_t dir)
 {
-	uint16_t i ;
-	uint16_t val = 0;
-	uint8_t dir = 1;
-
-	for (i = 0; i < 15000; i++)
-	{
-		delay_ms(8);
-		if(dir)
-			val++;
-		else
-			val--;
-		if(val > 300) dir=0;
-		if(val == 0 ) dir=1;
-		TIM3->CCR3 = val;
-	}
 
 }
 
@@ -48,8 +33,8 @@ void Tim3_init(void)
 	/* Compute the prescaler value */
 //	PrescalerValue = (uint16_t) (SystemCoreClock / 1) - 1;   // ?ò??°??μ?êéè???ú60hz   ??oóμ÷ê?ê±?ú??°é
 	/* Time base configuration */
-	TIM_TimeBaseStructure.TIM_Period = 899;		//400Hz的频率
-	TIM_TimeBaseStructure.TIM_Prescaler = 0;	//
+	TIM_TimeBaseStructure.TIM_Period = 150;		//400Hz的频率
+	TIM_TimeBaseStructure.TIM_Prescaler = 6;	//
 	TIM_TimeBaseStructure.TIM_ClockDivision = 0;	
 	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;		//?òé???êy
 	TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);

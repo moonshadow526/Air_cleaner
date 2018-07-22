@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\HARDWARE\LED;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\STM32F10x_FWLib\inc;..\CORE;..\HARDWARE\KEY;..\HARDWARE\TIM-capture;..\HARDWARE\TIMER;..\HARDWARE\USART3;..\HARDWARE\M26;..\HARDWARE\CHIPID;..\HARDWARE\PWM;..\HARDWARE\ADC</IncludePath>
+              <IncludePath>..\HARDWARE\LED;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\STM32F10x_FWLib\inc;..\CORE;..\HARDWARE\KEY;..\HARDWARE\TIM-capture;..\HARDWARE\TIMER;..\HARDWARE\USART3;..\HARDWARE\M26;..\HARDWARE\CHIPID;..\HARDWARE\PWM;..\HARDWARE\ADC;..\HARDWARE\RELAY;.\AES;..\HARDWARE\RTC;..\HARDWARE\STMFLASH</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -402,25 +402,30 @@
               <FilePath>.\status_manager.c</FilePath>
             </File>
             <File>
-              <FileName>AES.c</FileName>
+              <FileName>data_parser.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\AES.c</FilePath>
+              <FilePath>.\data_parser.c</FilePath>
             </File>
             <File>
-              <FileName>AES.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\AES.h</FilePath>
+              <FileName>aes_cbc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\AES\aes_cbc.c</FilePath>
+            </File>
+            <File>
+              <FileName>aes_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\AES\aes_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>aes_crypt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\AES\aes_crypt.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
           <GroupName>HARDWARE</GroupName>
           <Files>
-            <File>
-              <FileName>led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\LED\led.c</FilePath>
-            </File>
             <File>
               <FileName>key.c</FileName>
               <FileType>1</FileType>
@@ -455,6 +460,21 @@
               <FileName>adc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\ADC\adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>relay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\RELAY\relay.c</FilePath>
+            </File>
+            <File>
+              <FileName>rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\RTC\rtc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stmflash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\STMFLASH\stmflash.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -530,6 +550,31 @@
               <FileName>stm32f10x_adc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\STM32F10x_FWLib\src\stm32f10x_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STM32F10x_FWLib\src\stm32f10x_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STM32F10x_FWLib\src\stm32f10x_rtc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_bkp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STM32F10x_FWLib\src\stm32f10x_bkp.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_pwr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STM32F10x_FWLib\src\stm32f10x_pwr.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STM32F10x_FWLib\src\stm32f10x_flash.c</FilePath>
             </File>
           </Files>
         </Group>

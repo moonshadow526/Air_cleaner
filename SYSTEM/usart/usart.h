@@ -2,6 +2,7 @@
 #define __USART_H
 #include "stdio.h"	
 #include "sys.h" 
+#include "stmflash.h"
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
 //Mini STM32开发板
@@ -27,6 +28,9 @@
 ////////////////////////////////////////////////////////////////////////////////// 	
 #define USART_REC_LEN  			200  	//定义最大接收字节数 200
 #define EN_USART1_RX 			1		//使能（1）/禁止（0）串口1接收
+
+#define SIZE sizeof(USART_RX_BUF)		//数组长度
+#define FLASH_SAVE_ADDR  0X08070000		//设置FLASH 保存地址(必须为偶数，且其值要大于本代码所占用FLASH的大小+0X08000000)
 	  	
 extern u8  USART_RX_BUF[USART_REC_LEN]; //接收缓冲,最大USART_REC_LEN个字节.末字节为换行符 
 extern u8  USART_TX_BUF[USART_REC_LEN];

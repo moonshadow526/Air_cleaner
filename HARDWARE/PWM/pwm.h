@@ -1,5 +1,6 @@
 #ifndef		__PWM_H
 #define		__PWM_H
+#include "sys.h"
 
 #define 	Moto_PwmMax 	2000
 #define FR1 PEout(3)// PB5
@@ -11,7 +12,7 @@
 #define BREATHLED PBout(0)
 
 void Init_PWM(void);
-void breath_LED(void);
+void breath_LED(uint16_t val,uint8_t dir);
 
 
 #endif
